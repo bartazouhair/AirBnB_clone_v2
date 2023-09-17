@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""It's module defines a base class for all models in our hbnb clone"""
+"""This module defines a base class for all models in our hbnb clone"""
 import uuid
 from datetime import datetime
 import sys
@@ -10,13 +10,13 @@ Base = declarative_base()
 
 
 class BaseModel:
-    """So A base class for all hbnb models"""
+    """A base class for all hbnb models"""
     id = Column(String(60), primary_key=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
 
     def __init__(self, *args, **kwargs):
-        """It's gInstatntiates a new model"""
+        """Instatntiates a new model"""
         self.id = str(uuid.uuid4())
         if not kwargs:
             from models import storage
@@ -39,19 +39,19 @@ class BaseModel:
                     setattr(self, key, val)
 
     def __str__(self):
-        """So, Returns a string representation of the instance"""
+        """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
         return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
 
     def save(self):
-        """So, Updates updated_at with current time when instance is changed"""
+        """Updates updated_at with current time when instance is changed"""
         from models import storage
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
 
     def to_dict(self):
-        """So, Convert instance into dict format"""
+        """Convert instance into dict format"""
         dictionary = {}
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
@@ -64,6 +64,6 @@ class BaseModel:
         return dictionary
 
     def delete(self):
-        """ It's delete the current instance from storage"""
+        """delete the current instance from storage"""
         from models import storage
         storage.delete(self)
