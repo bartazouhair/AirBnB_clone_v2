@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""this module define class manage db storage for a  hbnb clone"""
+"""This module defines a class to manage db storage for hbnb clone"""
 from os import getenv
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -15,12 +15,12 @@ from models.user import User
 
 
 class DBStorage:
-    """sql database of storage"""
+    """SQL database storage"""
     __engine = None
     __session = None
 
     def __init__(self):
-        """creat an  engine && connect to a  database"""
+        """Create engine and connect to database"""
         user = getenv("HBNB_MYSQL_USER")
         pwd = getenv("HBNB_MYSQL_PWD")
         host = getenv("HBNB_MYSQL_HOST")
@@ -34,9 +34,9 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """return an dictionary
+        """returns a dictionary
         Return:
-            return an dictionary of __object
+            returns a dictionary of __object
         """
         dic = {}
         if cls:
@@ -56,20 +56,20 @@ class DBStorage:
         return (dic)
 
     def new(self, obj):
-        """add an  object to current database sessions"""
+        """add the object to the current database session"""
         self.__session.add(obj)
 
     def save(self):
-        """commit changes of current database sessions"""
+        """commit all changes of the current database session"""
         self.__session.commit()
 
     def delete(self, obj=None):
-        """delete from a current database sessions obj if not None"""
+        """delete from the current database session obj if not None"""
         if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
-        """create currents databases session froms engine
+        """Create current database session from the engine
         using a sessionmaker"""
         self.__session = Base.metadata.create_all(self.__engine)
         factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
@@ -77,5 +77,5 @@ class DBStorage:
         self.__session = Session()
 
     def close(self):
-        """removes sessions"""
+        """Remove session"""
         self.__session.close()
