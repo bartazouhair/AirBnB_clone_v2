@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module defines a class to manage db storage for hbnb clone"""
+"""c'est la module de definition pour la classe qui manage db storage"""
 from os import getenv
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -15,12 +15,12 @@ from models.user import User
 
 
 class DBStorage:
-    """SQL database storage"""
+    """c'est sql base de donnee storage"""
     __engine = None
     __session = None
 
     def __init__(self):
-        """Create engine and connect to database"""
+        """c'est creation engine pour se connnecter à la base de donnes"""
         user = getenv("HBNB_MYSQL_USER")
         pwd = getenv("HBNB_MYSQL_PWD")
         host = getenv("HBNB_MYSQL_HOST")
@@ -34,9 +34,9 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """returns a dictionary
+        """le retour un dictionnere
         Return:
-            returns a dictionary of __object
+            Retour un dictionere pour objet
         """
         dic = {}
         if cls:
@@ -56,26 +56,25 @@ class DBStorage:
         return (dic)
 
     def new(self, obj):
-        """add the object to the current database session"""
+        """c'est ajout un objet"""
         self.__session.add(obj)
 
     def save(self):
-        """commit all changes of the current database session"""
+        """c'est la suvegarde d'une session"""
         self.__session.commit()
 
     def delete(self, obj=None):
-        """delete from the current database session obj if not None"""
+        """c'est la sepression d'une session"""
         if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
-        """Create current database session from the engine
-        using a sessionmaker"""
+        """c'est recreer la session depuis engine"""
         self.__session = Base.metadata.create_all(self.__engine)
         factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(factory)
         self.__session = Session()
 
     def close(self):
-        """Remove session"""
+        """Fermeture session"""
         self.__session.close()
