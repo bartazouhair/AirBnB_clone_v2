@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines the Place class."""
+"""It's Defines the Place class."""
 import models
 from os import getenv
 from models.base_model import Base
@@ -28,10 +28,10 @@ association_table = Table("place_amenity", Base.metadata,
 
 
 class Place(BaseModel, Base):
-    """Represents a Place for a MySQL database.
+    """So, Represents a Place for a MySQL database.
     Inherits from SQLAlchemy Base and links to the MySQL table places
     """
-    __tablename__ = "places"
+    _tablename_ = "places"
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
     user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
     name = Column(String(128), nullable=False)
@@ -50,7 +50,7 @@ class Place(BaseModel, Base):
     if getenv("HBNB_TYPE_STORAGE", None) != "db":
         @property
         def reviews(self):
-            """Get a list of all linked Reviews."""
+            """So, Get a list of all linked Reviews."""
             review_list = []
             for review in list(models.storage.all(Review).values()):
                 if review.place_id == self.id:
@@ -59,7 +59,7 @@ class Place(BaseModel, Base):
 
         @property
         def amenities(self):
-            """Get/set linked Amenities."""
+            """So Get/set linked Amenities."""
             amenity_list = []
             for amenity in list(models.storage.all(Amenity).values()):
                 if amenity.id in self.amenity_ids:
