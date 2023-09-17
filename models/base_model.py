@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module defines a base class for all models in our hbnb clone"""
+"""cest un module quies defini a une base de class de hbnb """
 import uuid
 from datetime import datetime
 import sys
@@ -10,13 +10,13 @@ Base = declarative_base()
 
 
 class BaseModel:
-    """A base class for all hbnb models"""
+    """la base de tout les hbnb module """
     id = Column(String(60), primary_key=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
 
     def __init__(self, *args, **kwargs):
-        """Instatntiates a new model"""
+        """nouveau module instantaner """
         self.id = str(uuid.uuid4())
         if not kwargs:
             from models import storage
@@ -39,19 +39,19 @@ class BaseModel:
                     setattr(self, key, val)
 
     def __str__(self):
-        """Returns a string representation of the instance"""
+        """retour string qui repredente instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
         return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
 
     def save(self):
-        """Updates updated_at with current time when instance is changed"""
+        """mis ajour avec temps reel quannd il se change"""
         from models import storage
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
 
     def to_dict(self):
-        """Convert instance into dict format"""
+        """convertir instance dict forma"""
         dictionary = {}
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
@@ -64,6 +64,6 @@ class BaseModel:
         return dictionary
 
     def delete(self):
-        """delete the current instance from storage"""
+        """suprrime instance courant depuis le stockage"""
         from models import storage
         storage.delete(self)
