@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""c'est la module pour la classe User"""
+"""c'est la module pour la classe user"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
