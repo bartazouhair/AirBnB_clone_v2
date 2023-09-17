@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" State Module for HBNB project """
+"""c'est la module pour la classe state pour le projet HBNB"""
 from os import getenv
 from models.base_model import BaseModel, Base
 from models.city import City
@@ -9,7 +9,7 @@ import models
 
 
 class State(BaseModel, Base):
-    """ State class """
+    """c'est la classe state """
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
     cities = relationship("City",
@@ -18,7 +18,7 @@ class State(BaseModel, Base):
     if getenv('HBNB_TYPE_STORAGE') != "db":
         @property
         def cities(self):
-            """ returns list of City instances related to state """
+            """c'est le retour d'une liste city lier de la classe state"""
             from models import storage
             list_cities = []
             for city in storage.all(City).values():
