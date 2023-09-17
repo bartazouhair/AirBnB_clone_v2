@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" State Module for the HBNB project """
+""" state module for hbnb project """
 from os import getenv
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 
 
 class Amenity(BaseModel, Base):
-    """class for amenities"""
+    """class for an amenity"""
     __tablename__ = 'amenities'
     if getenv("HBNB_TYPE_STORAGE") == "db":
         name = Column(String(128), nullable=False)
