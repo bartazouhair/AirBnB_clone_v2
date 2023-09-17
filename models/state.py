@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" State Module for HBNB project """
+""" hhjkkjkjkllksyyyskkslslssms """
 from os import getenv
 from models.base_model import BaseModel, Base
 from models.city import City
@@ -9,8 +9,8 @@ import models
 
 
 class State(BaseModel, Base):
-    """ State class """
-    __tablename__ = 'states'
+    """ khlgslsmsmsmsssmll """
+    _tablename_ = 'states'
     name = Column(String(128), nullable=False)
     cities = relationship("City",
                           backref="state", cascade="all, delete,delete-orphan")
@@ -18,7 +18,7 @@ class State(BaseModel, Base):
     if getenv('HBNB_TYPE_STORAGE') != "db":
         @property
         def cities(self):
-            """ returns list of City instances related to state """
+            """ So returns hghggslmssmmml """
             from models import storage
             list_cities = []
             for city in storage.all(City).values():
