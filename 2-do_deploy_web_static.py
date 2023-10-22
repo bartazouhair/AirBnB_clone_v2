@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Does deployment"""
+""" kkkkkkkkkk"""
 
 from fabric.api import *
 import os
@@ -9,7 +9,7 @@ env.user = "ubuntu"
 
 
 def do_deploy(archive_path):
-    """ Deploys archive to servers"""
+    """ MMMMMMMMMMM"""
     if not os.path.exists(archive_path):
         return False
 
