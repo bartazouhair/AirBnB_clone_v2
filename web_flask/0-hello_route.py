@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-"""Starts a Flask web application."""
+"""web application must be listening on 0.0.0.0"""
 from flask import Flask
+
+
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=False)
-def hello_hbnb():
-    """Display “Hello HBNB!”."""
+@app.route("/", strict_slashes=False)
+def hello():
     return "Hello HBNB!"
 
 

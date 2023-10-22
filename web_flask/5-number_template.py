@@ -1,48 +1,44 @@
 #!/usr/bin/python3
-"""
-Start Flask web application
-"""
+"""web application must be listening on 0.0.0.0"""
+from flask import Flask
+from flask import render_template
 
-from flask import Flask, render_template
+
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=False)
-def index():
-    """Return Hello HBNB!"""
-    return 'Hello HBNB!'
+@app.route("/", strict_slashes=False)
+def hello():
+    return "Hello HBNB!"
 
 
-@app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    """Return HBNB"""
-    return 'HBNB'
+@app.route("/hbnb", strict_slashes=False)
+def Hbnb():
+    return "HBNB"
 
 
-@app.route('/c/<text>', strict_slashes=False)
-def cisfun(text):
-    """Display “C ” followed by value of text variable"""
-    return 'C ' + text.replace('_', ' ')
+@app.route("/c/<text>", strict_slashes=False)
+def c_text(text=None):
+    sanitize = text.replace("_", " ")
+    return f"C {sanitize}"
 
 
 @app.route('/python', strict_slashes=False)
-@app.route('/python/<text>', strict_slashes=False)
-def pythoniscool(text='is cool'):
-    """Display “Python ”, followed by value text variable"""
-    return 'Python ' + text.replace('_', ' ')
+@app.route("/python/<text>", strict_slashes=False)
+def p_text(text="is cool"):
+    sanitize = text.replace("_", " ")
+    return f"Python {sanitize}"
 
 
-@app.route('/number/<int:n>', strict_slashes=False)
-def imanumber(n):
-    """Display “n is a number” only if n is integer"""
-    return "{:d} is a number".format(n)
+@app.route("/number/<int:n>", strict_slashes=False)
+def n_int(n):
+    return f"{n} is a number"
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def numbersntemplates(n):
-    """Display a HTML page only if n is integer"""
+def display_number_template(n):
     return render_template('5-number.html', n=n)
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000')
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
